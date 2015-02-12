@@ -14,11 +14,9 @@ capture = ->(filename) {
   
 session = ISA::Session.new( :name => 'adb-session', :capture => capture, :dir => 'captures' )
   
-frame = session.capture
-reference = frame
+session.capture
 
-100.times do
-  array = reference.difference(frame)
+10.times do
   puts session.diff
 end
 

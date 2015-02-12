@@ -5,19 +5,16 @@ Helpers for grabbing screenshots over a time period, analyzing them, and stitchi
 ## Usage
 
     capture = ->(filename) {
-      device.screenshot(filename) 
+      device.screenshot(:filename => filename)
     }
     
-    session = ISA::Session.new( :name   => 'session_1',
-                                :assets => 'asset_directory',
-                                :lambda => capture )
+    session = ISA::Session.new( :name => 'adb-session', :capture => capture, :dir => 'captures' )
     
-    session.capture( :checkpoint_1 )
-    
-    sleep 5    
-    
-    session.capture( :checkpoint_2 )
-    
-    comp = session.compare( :checkpoint_1, :checkpoint_2 )
+    frame = session.capture
 
-    
+    10.times do
+      puts session.diff
+    end
+
+    file = session.end( './composite.gif' )
+

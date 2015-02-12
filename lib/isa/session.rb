@@ -10,7 +10,7 @@ module ISA
     def initialize( args )
       @name = args[:session] || Time.now.to_i
       @code = args[:capture] or raise 'Need to provide a lambda to the constructor'
-      @tmp_dir = '/tmp/isa/#{@name}' 
+      @tmp_dir = "/tmp/isa/#{@name}"
       @dir = args[:dir] || @tmp_dir
       
       FileUtils.mkdir_p(@dir)
