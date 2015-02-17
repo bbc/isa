@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = 'Analysis tool for investigating screenshots taken over a session'
   s.authors     = ['David Buckhurst']
   s.email       = 'david.buckhurst@bbc.co.uk'
-  s.files       = [ '' ]
+  s.files       = [ 'lib/isa/session.rb' ]
   s.homepage    = 'https://github.com/bbc-test/isa'
   s.license     = 'MIT'
   s.add_runtime_dependency 'rmagick'
