@@ -3,10 +3,20 @@ require 'fileutils'
 
 module ISA
   
+  # Main class for managing the capture sessions
   class Session
     
     attr_accessor :name, :tmp_dir, :dir, :code, :images, :checkpoint, :last_capture
     
+    # Initialize a capture session
+    # Takes a number of args:
+    # * session (optional) -- name for the capture session
+    # * dir (optional) -- directory to save the screenshots
+    # * capture (required) -- lambda for performing a screenshot
+    # The lambda should take a single argument filename:
+    #         take_screenshot = ->(filename) {
+    #           code_to_perform_screenshot( :save_to => filename )
+    #         }
     def initialize( args )
       @name = args[:session] || Time.now.to_i
       @code = args[:capture] or raise 'Need to provide a lambda to the constructor'
@@ -21,7 +31,7 @@ module ISA
       @images = Magick::ImageList.new
     end
  
-    
+    # Perform a screenshot capture
     def capture(checkpoint = nil)
       
       if checkpoint
@@ -61,7 +71,8 @@ module ISA
       last.difference(current)[0].to_i
     end
     
-    
+    # Finalize the capture session, and create an animated gif
+    # of the capture session
     def end(filename = nil)
       if !filename
         filename = "#{@dir}/#{@name}.gif"
@@ -75,7 +86,6 @@ module ISA
       images.each {|i|  i.resize_to_fit!(width, height) }
       images.write(filename)
     end
-    
     
   end
    
