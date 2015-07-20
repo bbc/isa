@@ -1,3 +1,5 @@
+![ISA](http://bbc.github.io/hive-ci/images/isa-logo.png)
+
 #ISA -- Image Session Analyzer
 
 Helpers for grabbing screenshots over a time period, analyzing them, and
