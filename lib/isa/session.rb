@@ -46,8 +46,12 @@ module ISA
       code.call(file)
       
       File.exist? file or raise "Couldn't capture screenshot"
-      
-      image = Magick::ImageList.new(file).first
+
+      begin
+        image = Magick::ImageList.new(file).first
+      rescue Magick::ImageMagickError
+        raise "Couldn't parse image: #{file}"
+      end
       
       if @last_capture
         delay = (capture_time - @last_capture).to_i
